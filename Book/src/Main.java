@@ -1,30 +1,19 @@
-import java.lang.reflect.Array;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-
 public class Main {
     public static void main(String[] args) {
+        var books = new BookList();
+        books.Add(new Book("Java", "Horstmann"));
+        books.Add(new Book("Разочарованный цветок", "Bob Mirskiy"));
+        books.Add(new Book("Евгений Онегин", "Пушкин"));
+        books.Add(new Book("Мертвые души", "Гоголь"));
+        books.Add(new Book("Капитанская дочка", "Пушкин"));
 
-        ArrayList<Book> books = new ArrayList<>();
-        books.add(new Book("Java", "Horstmann"));
-        books.add(new Book("Разочарованный цветок", "Bob Mirskiy"));
-        books.add(new Book("Евгений Онегин", "Пушкин"));
-        books.add(new Book("Мертвые души", "Гоголь"));
-
-        books.sort(new BookByAuthorComparator());
-        System.out.println("Книги, отсортированные по автору:");
-        for (var book : books) {
-            System.out.println(book);
+        var booksByAuthor = books.FindBooksByAuthor("Пушкин");
+        System.out.println("Книги Пушкина:");
+        for (var x:booksByAuthor) {
+            System.out.println(x);
         }
 
-        System.out.println();
-
-        Collections.sort(books);
-        System.out.println("Книги, отсортированные по названию:");
-        for (var book : books) {
-            System.out.println(book);
-        }
+        books.SortByAuthor();
+        System.out.println(books.BinarySearchByName("Лермонтов"));
     }
 }
