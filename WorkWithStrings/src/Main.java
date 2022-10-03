@@ -26,9 +26,9 @@ public class Main {
                         stringBuilder.append(token).append(" ");
                     }
                 }
-                line = in.nextLine();
                 fileWriter.write(stringBuilder.toString());
                 fileWriter.write("\n");
+                line = in.nextLine();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
