@@ -13,7 +13,14 @@ public class Main {
             System.out.println(x);
         }
 
+        System.out.println();
+
+        System.out.println("Книги, отсортированные по автору: ");
+
         books.SortByAuthor();
+        for (var x:books) {
+            System.out.println(x);
+        }
         System.out.println(books.BinarySearchByName("Лермонтов"));
     }
 }

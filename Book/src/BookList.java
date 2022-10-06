@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class BookList {
-    public ArrayList<Book> Books;
+public class BookList implements Iterable<Book>{
+    private ArrayList<Book> Books;
     public BookList() {
         Books = new ArrayList<>();
     }
@@ -14,19 +14,48 @@ public class BookList {
         Collections.sort(Books);
     }
     public int BinarySearchByName(String name) {
-        int index = Collections.binarySearch(Books, new Book(name, null), Book::compareTo);
-        return index;
+        return Collections.binarySearch(Books, new Book(name, null), Book::compareTo);
     }
     public void Add(Book b) {
         Books.add(b);
     }
-    public ArrayList<Book> FindBooksByAuthor(String authorName) {
-        ArrayList<Book> booksByAuthor = new ArrayList<Book>();
+    public BookList FindBooksByAuthor(String authorName) {
+        BookList booksByAuthor = new BookList();
         for (var book : Books) {
             if (book.Author.equals(authorName)) {
-                booksByAuthor.add(book);
+                booksByAuthor.Add(book);
             }
         }
         return booksByAuthor;
+    }
+
+    public Book Get(int index) {
+        return Books.get(index);
+    }
+
+    @Override
+    public Iterator<Book> iterator() {
+        return new BookListIterator();
+    }
+    class BookListIterator implements Iterator<Book> {
+        Book nextBook;
+        int currentIndex;
+        public BookListIterator() {
+            nextBook = Books.get(0);
+            currentIndex = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return currentIndex < Books.size();
+        }
+
+        @Override
+        public Book next() {
+            Book result = nextBook;
+            if (++currentIndex < Books.size()) {
+                nextBook = Books.get(currentIndex);
+            }
+            return result;
+        }
     }
 }
