@@ -22,5 +22,9 @@ public class Main {
             System.out.println(x);
         }
         System.out.println(books.BinarySearchByName("Лермонтов"));
+        var book = new Book("Книга", "Автор");
+        System.out.println(book.toJson());
+
+        System.out.println(books.toJson());
     }
 }

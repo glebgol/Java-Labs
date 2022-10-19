@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.Comparator;
 
 public class Book implements Comparable<Book>{
@@ -22,5 +25,9 @@ public class Book implements Comparable<Book>{
             return book1.Author.compareTo(book2.Author);
         }
     }
-
+    public String toJson() {
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        return gson.toJson(this);
+    }
 }

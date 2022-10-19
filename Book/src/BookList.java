@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -37,6 +40,13 @@ public class BookList implements Iterable<Book>{
     public Iterator<Book> iterator() {
         return new BookListIterator();
     }
+
+    public String toJson() {
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        return gson.toJson(Books);
+    }
+
     class BookListIterator implements Iterator<Book> {
         Book nextBook;
         int currentIndex;
