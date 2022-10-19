@@ -9,5 +9,8 @@ public enum StringCondition {
     SymbolEnd,
     StringConst,
     StringConst2,
-    CharBody
+    CharBody,
+    StringBody,
+    StringEnd,
+    SpecSymbol
 }

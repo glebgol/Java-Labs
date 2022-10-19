@@ -18,15 +18,44 @@ public class Main {
         for (char c : charArray) {
             switch (condition) {
                 case Start:
-                    if (c == '\"') {
+                    if(c == '"'){
                         resultFile.append(c);
-                        condition = StringCondition.StringConst;
+                        condition = StringCondition.StringBody;
                     }
                     else if (c == '/'){
                         condition = StringCondition.CommentBegin;
                     }
                     else {
                         resultFile.append(c);
+                        condition = StringCondition.Start;
+                    }
+                    break;
+                case StringBody:
+                    if(c == '"'){
+                        resultFile.append(c);
+                        condition = StringCondition.StringEnd;
+                    }
+                    else if(c == '\\'){
+                        resultFile.append(c);
+                        condition = StringCondition.SpecSymbol;
+                    }
+                    else {
+                        resultFile.append(c);
+                        condition = StringCondition.StringBody;
+                    }
+                    break;
+                case SpecSymbol:
+                    resultFile.append(c);
+                    condition = StringCondition.StringBody;
+                    break;
+                case StringEnd:
+                    if(c == '"'){
+                        resultFile.append(c);
+                        condition = StringCondition.StringBody;
+                    }
+                    else {
+                        resultFile.append(c);
+                        condition = StringCondition.Start;
                     }
                     break;
                 case CommentBegin:
@@ -45,7 +74,6 @@ public class Main {
                     else {
                         condition = StringCondition.CommentToEnd;
                     }
-                    break;
                 case CommentLines:
                     if (c == '*') {
                         condition = StringCondition.CommentEnd;
@@ -66,7 +94,13 @@ public class Main {
         }
         return resultFile.toString();
     }
-    public static void main(String[] args) throws FileNotFoundException {
-        System.out.println(GetJavaFileWithoutComments("file.txt"));
+
+    public static void main(String[] args) {
+        try {
+            System.out.println(GetJavaFileWithoutComments("file.txt"));
+        }
+        catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

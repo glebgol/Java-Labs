@@ -5,3 +5,7 @@
 */
 333pibtrhbihtrb
 444bripyrhbipyrj
+"//привет
+/*
+пепеипе
+*/"
