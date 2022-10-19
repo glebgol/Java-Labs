@@ -22,6 +22,10 @@ public class Main {
                         resultFile.append(c);
                         condition = StringCondition.StringBody;
                     }
+                    else if(c == '\''){
+                        resultFile.append(c);
+                        condition = StringCondition.CharBody;
+                    }
                     else if (c == '/'){
                         condition = StringCondition.CommentBegin;
                     }
@@ -66,28 +70,53 @@ public class Main {
                         condition = StringCondition.CommentLines;
                     }
                     break;
-                case CommentToEnd:
-                    if (c == '\n') {
-                        resultFile.append(c);
-                        condition = StringCondition.Start;
-                    }
-                    else {
-                        condition = StringCondition.CommentToEnd;
-                    }
                 case CommentLines:
                     if (c == '*') {
-                        condition = StringCondition.CommentEnd;
+                        condition = StringCondition.CommentEndMaybe;
                     }
                     else {
                         condition = StringCondition.CommentLines;
                     }
                     break;
+                case CommentEndMaybe:
+                    if (c == '/') {
+                        condition = StringCondition.Start;
+                    }
+                    else {
+                        condition = StringCondition.CommentEndMaybe;
+                    }
+                    break;
                 case CommentEnd:
                     if (c == '\n') {
+                        resultFile.append('\n');
                         condition = StringCondition.Start;
                     }
                     else {
                         condition = StringCondition.CommentEnd;
+                    }
+                    break;
+                case CharBody:
+                    if(c == '\\'){
+                        resultFile.append(c);
+                        condition = StringCondition.CharSpecSymbol;
+                    }
+                    else if (c == '\'') {
+                        resultFile.append(c);
+                        condition = StringCondition.Start;
+                    }
+                    else {
+                        resultFile.append(c);
+                        condition = StringCondition.CharBody;
+                    }
+                    break;
+                case CharSpecSymbol:
+                    if(c == '\''){
+                        resultFile.append(c);
+                        condition = StringCondition.Start;
+                    }
+                    else {
+                        resultFile.append(c);
+                        condition = StringCondition.CharSpecSymbol;
                     }
                     break;
             }
