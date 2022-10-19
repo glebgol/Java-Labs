@@ -66,6 +66,11 @@ public class Main {
                     if (c == '/') {
                         condition = StringCondition.CommentEnd;
                     }
+                    else if (c == '\'') {
+                        resultFile.append('/');
+                        resultFile.append(c);
+                        condition = StringCondition.CharBody;
+                    }
                     else if (c == '*') {
                         condition = StringCondition.CommentLines;
                     }

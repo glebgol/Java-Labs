@@ -21,6 +21,7 @@
             char ccc = '*';
             char cccc = '"'; //"hjhkjhkj
             System.out.println("/*dfsdf*////****/**//**Hello\", \\'world!\\");/**/ //
+            char cccc = 100/'*';
             char cccc = '*';
             char f = '\\';
             char f1 = '\n';
