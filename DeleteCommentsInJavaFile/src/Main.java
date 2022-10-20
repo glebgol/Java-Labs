@@ -57,9 +57,8 @@ public class Main {
                         resultFile.append(c);
                         condition = StringCondition.StringBody;
                     }
-                    else {
-                        resultFile.append(c);
-                        condition = StringCondition.Start;
+                    else if (c == '/'){
+                        condition = StringCondition.CommentBegin;
                     }
                     break;
                 case CommentBegin:
