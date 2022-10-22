@@ -1,5 +1,7 @@
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         var books = new BookList();
         books.Add(new Book("Java", "Horstmann"));
         books.Add(new Book("Разочарованный цветок", "Bob Mirskiy"));
@@ -26,5 +28,12 @@ public class Main {
         System.out.println(book.toJson());
 
         System.out.println(books.toJson());
+        books.WriteToJsonFile("books.json");
+
+        var readedFromJsonFileBooks = new BookList();
+        readedFromJsonFileBooks.ReadFromJsonFile("books.json");
+        for (var x:readedFromJsonFileBooks) {
+            System.out.println(x);
+        }
     }
 }

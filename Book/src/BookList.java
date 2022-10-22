@@ -1,11 +1,15 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
-public class BookList implements Iterable<Book>{
+public class BookList implements Iterable<Book>, Cloneable{
     private ArrayList<Book> Books;
     public BookList() {
         Books = new ArrayList<>();
@@ -42,9 +46,23 @@ public class BookList implements Iterable<Book>{
     }
 
     public String toJson() {
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-        return gson.toJson(Books);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this);
+    }
+
+    public void WriteToJsonFile(String jsonFileName) throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Writer writer = Files.newBufferedWriter(Paths.get(jsonFileName));
+        gson.toJson(this, writer);
+        writer.close();
+    }
+
+    public void ReadFromJsonFile(String jsonFileName) throws IOException {
+        Gson gson = new Gson();
+        Reader reader = Files.newBufferedReader(Paths.get(jsonFileName));
+        var bookList = (gson.fromJson(reader, BookList.class));
+        //Boo
+        reader.close();
     }
 
     class BookListIterator implements Iterator<Book> {
