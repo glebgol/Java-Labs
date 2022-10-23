@@ -60,8 +60,8 @@ public class BookList implements Iterable<Book>, Cloneable{
     public void ReadFromJsonFile(String jsonFileName) throws IOException {
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get(jsonFileName));
-        var bookList = (gson.fromJson(reader, BookList.class));
-        //Boo
+        var bookList = gson.fromJson(reader, BookList.class);
+        Books = new ArrayList<>(bookList.Books);
         reader.close();
     }
 
