@@ -61,7 +61,7 @@ public class BookList implements Iterable<Book>, Cloneable{
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get(jsonFileName));
         var bookList = gson.fromJson(reader, BookList.class);
-        Books = new ArrayList<>(bookList.Books);
+        Books = bookList.Books;
         reader.close();
     }
 
