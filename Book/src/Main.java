@@ -9,31 +9,9 @@ public class Main {
         books.Add(new Book("Мертвые души", "Гоголь"));
         books.Add(new Book("Капитанская дочка", "Пушкин"));
 
-        var booksByAuthor = books.FindBooksByAuthor("Пушкин");
-        System.out.println("Книги Пушкина:");
-        for (var x:booksByAuthor) {
-            System.out.println(x);
-        }
-
+        books.PrintBooks();
+        var s = books.FilterByAuthorName("Пушкин");
         System.out.println();
-
-        System.out.println("Книги, отсортированные по автору: ");
-
-        books.SortByAuthor();
-        for (var x:books) {
-            System.out.println(x);
-        }
-        System.out.println(books.BinarySearchByName("Лермонтов"));
-        var book = new Book("Книга", "Автор");
-        System.out.println(book.toJson());
-
-        System.out.println(books.toJson());
-        books.WriteToJsonFile("books.json");
-
-        var readedFromJsonFileBooks = new BookList();
-        readedFromJsonFileBooks.ReadFromJsonFile("books.json");
-        for (var x:readedFromJsonFileBooks) {
-            System.out.println(x);
-        }
+        s.PrintBooks();
     }
 }

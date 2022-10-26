@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class BookList implements Iterable<Book>, Cloneable{
     private ArrayList<Book> Books;
@@ -64,6 +65,22 @@ public class BookList implements Iterable<Book>, Cloneable{
         Books = bookList.Books;
         reader.close();
     }
+
+    public BookList FilterByAuthorName(String name) {
+        var stream = Books.stream();
+        var res = stream.filter(book -> book.Author.equals(name));
+
+        var filteredBooks = new BookList();
+        Collections.addAll(filteredBooks.Books, res.toArray(Book[]::new));
+        return filteredBooks;
+    }
+
+    public void PrintBooks() {
+        var stream = Books.stream();
+        stream.forEach(System.out::println);
+    }
+
+    public
 
     class BookListIterator implements Iterator<Book> {
         Book nextBook;
