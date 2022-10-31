@@ -8,7 +8,7 @@ public class SumOfRow {
         else if (k <= 0) {
             throw new IllegalArgumentException("Argument k should be natural number!");
         }
-        double e = Math.pow(10, -(k + 1));
+        double e = Math.pow(10, -(k + 2));
         double sum = 1;
         double element = 0.5 * x;
         int r = 1;
@@ -16,7 +16,7 @@ public class SumOfRow {
             sum += element;
             element = -1 * element * x * (double) r / (r + 3);
             r += 2;
-            if (Math.abs(element) < e) {
+            if (Math.abs(element) <= e) {
                 break;
             }
         }
