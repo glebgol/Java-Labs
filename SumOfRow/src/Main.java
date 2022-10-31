@@ -8,7 +8,6 @@ public class Main {
 
         NumberFormat formatter = NumberFormat.getNumberInstance();
         formatter.setMaximumFractionDigits(5);
-
         while (true) {
             try {
                 System.out.println("Enter the number int (-1, 1): ");

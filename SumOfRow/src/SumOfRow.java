@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.function.Executable;
+
 public class SumOfRow {
     public static double GetSumOfRow(double x, int k) {
         if (x >= 1 || x <= -1) {
