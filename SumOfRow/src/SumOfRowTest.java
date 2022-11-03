@@ -2,8 +2,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 
 class SumOfRowTest {
@@ -23,20 +26,19 @@ class SumOfRowTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = { -0.5, 0.5, 0.3, -0.2, 0.75, 0.8})
-    public void SumOfRow_ValidParameters_ReturnsRightResult(double number) {
+    @ArgumentsSource(ArgumentProvider.class)
+    public void SumOfRow_ValidParameters_ReturnsRightResult(ArgumentProvider.Argument argument) {
         // Arrange
-        int precision = 4;
         NumberFormat formatter = NumberFormat.getNumberInstance();
-        formatter.setMaximumFractionDigits(precision);
-        double expectedValue = Math.sqrt(1 + number);
-        var expectedFormattedString = formatter.format(expectedValue);
+        formatter.setMaximumFractionDigits(argument.precision);
+        var expectedValue = new BigDecimal(Math.sqrt(1 + argument.argument));
+        var expectedRoundedValue = expectedValue.setScale(argument.precision, RoundingMode.DOWN);
 
         // Act
-        double result = SumOfRow.GetSumOfRow(number, precision);
-        var resultFormattedString = formatter.format(result);
+        var resultValue = new BigDecimal(SumOfRow.GetSumOfRow(argument.argument, argument.precision));
+        var resultRoundedValue = resultValue.setScale(argument.precision, RoundingMode.DOWN);
 
         // Assert
-        Assertions.assertEquals(resultFormattedString, expectedFormattedString);
+        Assertions.assertEquals(expectedRoundedValue, resultRoundedValue);
     }
 }
