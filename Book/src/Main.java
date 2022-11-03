@@ -13,5 +13,8 @@ public class Main {
         var s = books.FilterByAuthorName("Пушкин");
         System.out.println();
         s.PrintBooks();
+
+        var res = books.GroupByAuthorName("Пушкин");
+        System.out.println(res);
     }
 }

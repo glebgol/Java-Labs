@@ -17,7 +17,7 @@ public class Book implements Comparable<Book>{
     }
     @Override
     public String toString() {
-        return Name + " " + Author;
+        return Name;
     }
     static class BookByAuthorComparator implements Comparator<Book> {
         @Override

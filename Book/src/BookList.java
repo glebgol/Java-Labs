@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class BookList implements Iterable<Book>, Cloneable{
@@ -80,9 +81,13 @@ public class BookList implements Iterable<Book>, Cloneable{
         stream.forEach(System.out::println);
     }
 
-    public
+    public Map<String, List<Book>> GroupByAuthorName(String name) {
+        var stream = Books.stream();
+        var res = stream.collect(Collectors.groupingBy(b -> b.Author));
+        return res;
+    }
 
-    class BookListIterator implements Iterator<Book> {
+    public class BookListIterator implements Iterator<Book> {
         Book nextBook;
         int currentIndex;
         public BookListIterator() {
