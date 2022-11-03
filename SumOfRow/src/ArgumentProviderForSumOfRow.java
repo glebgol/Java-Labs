@@ -4,7 +4,7 @@ import org.junit.jupiter.params.provider.ArgumentsProvider;
 
 import java.util.stream.Stream;
 
-public class ArgumentProvider implements ArgumentsProvider {
+public class ArgumentProviderForSumOfRow implements ArgumentsProvider {
     public static class Argument {
         public int precision;
         public double argument;
@@ -18,8 +18,9 @@ public class ArgumentProvider implements ArgumentsProvider {
     public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
         return Stream.of(
                 Arguments.of(new Argument(0.5, 4)),
-                Arguments.of(new Argument(0.6, 2)),
-                Arguments.of(new Argument(0.7, 1))
+                Arguments.of(new Argument(0.6, 6)),
+                Arguments.of(new Argument(-0.7, 10)),
+                Arguments.of(new Argument(0.1, 12))
         );
     }
 }

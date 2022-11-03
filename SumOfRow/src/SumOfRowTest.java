@@ -1,5 +1,3 @@
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
@@ -26,8 +24,8 @@ class SumOfRowTest {
     }
 
     @ParameterizedTest
-    @ArgumentsSource(ArgumentProvider.class)
-    public void SumOfRow_ValidParameters_ReturnsRightResult(ArgumentProvider.Argument argument) {
+    @ArgumentsSource(ArgumentProviderForSumOfRow.class)
+    public void SumOfRow_ValidParameters_ReturnsRightResult(ArgumentProviderForSumOfRow.Argument argument) {
         // Arrange
         NumberFormat formatter = NumberFormat.getNumberInstance();
         formatter.setMaximumFractionDigits(argument.precision);
