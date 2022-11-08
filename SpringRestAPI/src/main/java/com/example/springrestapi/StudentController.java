@@ -1,11 +1,11 @@
 package com.example.springrestapi;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("api/students")
 public class StudentController {
     private final IStudentRepository repository;
 
@@ -13,8 +13,13 @@ public class StudentController {
         this.repository = repository;
     }
 
-    @GetMapping("/students")
+    @GetMapping
     List<Student> getAllStudents() {
         return repository.findAll();
+    }
+
+    @GetMapping("{id}")
+    Student getStudentById(@PathVariable Long id) {
+        return repository.findById(id).get();
     }
 }
