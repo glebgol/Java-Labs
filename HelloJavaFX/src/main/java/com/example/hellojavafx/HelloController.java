@@ -15,16 +15,72 @@ import java.io.IOException;
 
 public class HelloController {
     @FXML
-    private Label welcomeText;
+    private TextField inputLine1;
     @FXML
-    private TextField inputLine;
+    private TextField inputLine2;
     @FXML
     private Label resultLabel;
+
     @FXML
-    protected void onCalculateButtonClick() {
-        var inputText = inputLine.getCharacters().toString();
-        var result = SumOfString.GetSumOfNumbersRegEx(inputText);
-        ShowResultMessage(result);
+    protected void onPlusButtonClick() {
+        try {
+            var str1 = inputLine1.getCharacters().toString();
+            var num1 = Integer.parseInt(str1);
+            var str2 = inputLine2.getCharacters().toString();
+            var num2 = Integer.parseInt(str2);
+            var result = num1 + num2;
+            ShowResultMessage(result);
+        }
+        catch (Exception ex) {
+            ShowWarningMessage("Input is null");
+        }
+    }
+
+    @FXML
+    protected void onMinusButtonClick() {
+        try {
+            var str1 = inputLine1.getCharacters().toString();
+            var num1 = Integer.parseInt(str1);
+            var str2 = inputLine2.getCharacters().toString();
+            var num2 = Integer.parseInt(str2);
+            var result = num1 - num2;
+            ShowResultMessage(result);
+        }
+        catch (Exception ex) {
+            ShowWarningMessage("Input is null");
+        }
+    }
+    @FXML
+    protected void onMultiplyButtonClick() {
+        try {
+            var str1 = inputLine1.getCharacters().toString();
+            var num1 = Double.parseDouble(str1);
+            var str2 = inputLine2.getCharacters().toString();
+            var num2 = Double.parseDouble(str2);
+            var result = num1 * num2;
+            ShowResultMessage(result);
+        }
+        catch (Exception ex) {
+            ShowWarningMessage("Input is null");
+        }
+    }
+    @FXML
+    protected void onDivideButtonClick() {
+        try {
+            var str1 = inputLine1.getCharacters().toString();
+            var num1 = Double.parseDouble(str1);
+            var str2 = inputLine2.getCharacters().toString();
+            var num2 = Double.parseDouble(str2);
+            if (num2 == 0) {
+                ShowWarningMessage("Деление на 0");
+                return;
+            }
+            var result = num1 / num2;
+            ShowResultMessage(result);
+        }
+        catch (Exception ex) {
+            ShowWarningMessage("Input is null");
+        }
     }
 
     private void ShowResultMessage(double result) {
@@ -35,5 +91,13 @@ public class HelloController {
         info.setHeaderText("Successful");
         info.setContentText(contentResult);
         info.showAndWait();
+    }
+
+    private void ShowWarningMessage(String message) {
+        var warning = new Alert(Alert.AlertType.WARNING);
+        warning.initStyle(StageStyle.DECORATED);
+        warning.setTitle("Warning");
+        warning.setContentText(message);
+        warning.showAndWait();
     }
 }

@@ -14,7 +14,12 @@
     </padding>
 
     <Label fx:id="welcomeText"/>
-    <Text>Enter string with numbers</Text>
-    <TextField fx:id="inputLine"/>
-    <Button text="Calculate!" onAction="#onCalculateButtonClick"/>
+    <Text>Enter 2 numbers</Text>
+    <TextField fx:id="inputLine1"/>
+    <TextField fx:id="inputLine2"/>
+    <Button text="+" onAction="#onPlusButtonClick"/>
+    <Button text="-" onAction="#onMinusButtonClick"/>
+    <Button text="*" onAction="#onMultiplyButtonClick"/>
+    <Button text="/" onAction="#onDivideButtonClick"/>
+
 </VBox>
